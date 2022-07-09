@@ -65,7 +65,7 @@ def recieveImage(message, state):
         file_id = message.document.file_id
         file_info = bot.get_file(file_id)
         file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(API_TOKEN, file_info.file_path))
-        filename = "telegramBot/photosIn/" + file_id 
+        filename = "telegramBot/photosIn/" + file_id  + ".jpg"
         with open(filename, 'wb') as f:
             f.write(file.content)
         print(state)

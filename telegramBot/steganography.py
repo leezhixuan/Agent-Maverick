@@ -10,7 +10,7 @@ def encodeText(messageToHide, imageName):
     #image name (with extension), i think we provide the image path to telegram bot right? idk
     image = cv2.imread(imageName) # Read the input image using OpenCV-Python.
     
-    encoded_image = hideData(image, messageToHide) # call the hideData function to hide the secret message into the selected image
+    encoded_image = hideData(imageName, image, messageToHide) # call the hideData function to hide the secret message into the selected image
     
     # # we try to return the image rather than saving it somewhere
     # filename = input("Enter the name of new encoded image(with extension): ") 
@@ -26,7 +26,7 @@ def decodeText(imageName):
     return text
 
 
-def hideData(image, secret_message):
+def hideData(imageName, image, secret_message):
 
     # calculate the maximum bytes to encode
     n_bytes = image.shape[0] * image.shape[1] * 3 // 8
@@ -70,6 +70,7 @@ def hideData(image, secret_message):
             if data_index >= data_len:
                 break
 
+    cv2.imwrite(imageName,image)           
     return image
 
 def showData(image):
