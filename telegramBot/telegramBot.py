@@ -1,13 +1,19 @@
 import os
-from dotenv import load_dotenv
 import telebot
-from telebot import types
 import requests
+import sys
+
+sys.path.insert(0, '/Users/eqxy/Desktop/Code/lifehack22-PrBros/tools')
+
+from dotenv import load_dotenv
+from telebot import types
+from steganography import encodeText, decodeText 
+
 
 load_dotenv()
 
-APIKey = os.getenv('APIKey')
-bot = telebot.TeleBot(APIKey)
+API_TOKEN= os.getenv('API_TOKEN')
+bot = telebot.TeleBot(API_TOKEN)
 
 messageIdList = []
 
@@ -58,18 +64,18 @@ def recieveImage(message, state):
 
         file_id = message.document.file_id
         file_info = bot.get_file(file_id)
-        file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(APIKey, file_info.file_path))
+        file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(API_TOKEN, file_info.file_path))
         filename = "telegramBot/photosIn/" + file_id 
         with open(filename, 'wb') as f:
             f.write(file.content)
-
-        if state == "Encrypt":
+        print(state)
+        if (state == "Encrypt"):
             msg = bot.reply_to(message, "Photo recieved. Please key in your message.")
             bot.register_next_step_handler(msg, encryptImage, filename)
             messageIdList.append(message.message_id)
-        if state == "Decrypt":
+        elif state == "Decrypt":
             msg = bot.reply_to(message, "Photo recieved.")
-            bot.register_next_step_handler(msg, decryptMessage, filename)
+            bot.send_message(message.chat.id, f"Decrypted Message: {decryptMessage(message, filename)}") #Decrypted message
             messageIdList.append(message.message_id)
 
 
@@ -78,20 +84,19 @@ def encryptImage(message, filename):
     Gets both message to be encrypted and image, returns the image.
     """
     imageFile = open(filename, 'rb')
+    encodeText(message.text, filename)
     bot.send_message(message.chat.id, f"Your message to be encrypted is {message.text}, and the photo is the following.")
     bot.send_document(message.chat.id, imageFile) #Sents encrypted photo back
     messageIdList.append(message.message_id)
-    #Write function for encryption
-
-    clearChat(message)
+    #clearChat(message)
     
-def decryptMessage(message,filename):
+def decryptMessage(message, filename):
     """
     Need to write a function that decrypts the thing and sends it back.
     """
-    output = "Test output"
-    bot.send_message(message.chat.id, f"Decrypted Message: {output}") #Decrypted message
-    messageIdList.append(message.message_id) 
+    imageFile = open(filename, 'rb')
+    decodeText(filename)
+    messageIdList.append(message.message_id)
 
 
 @bot.message_handler(commands=['delete'])

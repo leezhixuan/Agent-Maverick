@@ -13,13 +13,19 @@ def generate_secret_key_for_AES_cipher():
     encoded_secret_key = base64.b64encode(secret_key)
     return encoded_secret_key
 
-def encrypt_message(private_msg, secret_key):
+def encrypt_message(private_msg):
+    secret_key = generate_secret_key_for_AES_cipher()
     cipher = AES.new(secret_key, AES.MODE_EAX)
     global nonce 
     nonce = cipher.nonce
     encoded_message = str.encode(private_msg)
     ciphertext, tag = cipher.encrypt_and_digest(encoded_message)
-    return ciphertext, tag
+    keyCiphertext = b'secret_key%*' + ciphertext
+
+    print("Recevied Secret Message: " + private_msg)
+    print(b'Private Key generated: ' + secret_key)
+    print(b'Key + ciphertext: ' + keyCiphertext) 
+    return keyCiphertext, tag
 
 def decrypt_message(ciphertext, encoded_secret_key, tag):
     cipher = AES.new(encoded_secret_key, AES.MODE_EAX, nonce=nonce)

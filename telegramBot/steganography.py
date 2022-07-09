@@ -1,12 +1,10 @@
 import cv2
-import types
 
 from cryptography import encrypt_message, decrypt_message
 from utils import convertTextToBinary
 from bitstring import BitArray
 
 def encodeText(messageToHide, imageName): 
-
     if (len(messageToHide) == 0): 
         raise ValueError('Data is empty')
     #image name (with extension), i think we provide the image path to telegram bot right? idk
@@ -41,9 +39,9 @@ def hideData(image, secret_message):
 
     data_index = 0
     # convert input data to binary format using messageToBinary() fucntion
-    cipherText = encrypt_message(secret_message)
-    binaryCipherText = BitArray(hex=cipherText)
-    #binaryCipherText = convertTextToBinary(cipherText)
+    # cipherText = encrypt_message(secret_message)[0]  #uncomment this 
+    #binaryCipherText = BitArray(hex=cipherText)
+    binaryCipherText = convertTextToBinary(secret_message)
 
 
     data_len = len(binaryCipherText) #Find the length of data that needs to be hidden
@@ -75,7 +73,6 @@ def hideData(image, secret_message):
     return image
 
 def showData(image):
-
     binary_data = ""
     for values in image:
         for pixel in values:
@@ -94,8 +91,10 @@ def showData(image):
         decoded_data += chr(int(byte, 2))
         if decoded_data[-5:] == "#####": #check if we have reached the delimeter which is "#####"
             break
-
-    result = decrypt_message(decoded_data[:-5])
+    
+    # result = decrypt_message(decoded_data[:-5])
+    result = decoded_data[:-5]
+    print(result)
 
     return result #remove the delimeter to show the original hidden message
 
