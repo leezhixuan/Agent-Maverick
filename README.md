@@ -25,7 +25,7 @@ Once the repo is cloned, create an .env file and insert the line below:
 
 ```API_TOKEN = 'INSERT API TOKEN HERE'```
 
-Navigate to telegramBot/telegramBot.py and run the file. 
+Navigate to `telegramBot/telegramBot.py` and run the file. 
 
 Agent Maverick becomes live the moment the file is run.
 
@@ -61,7 +61,7 @@ In the LSB approach, we replace the last bit of each pixel with each bit of our 
 ## How we built it
 
 ### Telegram Bot
-We utilised the pyTelegramBotAPI library to build Agent Maverick. Images that are sent to Agent Maverick are stored locally on the host's computer for either encryption or decryption to be done. The images are deleted from the host's computer when the user invokes the Delete function. chatIDs and messageIDs are stored to faciliate implementation of a Delete function which clears all sensitive text. The IDs are deleted subsequently. Due to a limitation on Telegram's part, messages can only be deleted if they were sent less than 48 hours ago. 
+We utilised the `pyTelegramBotAPI` library to build **Agent Maverick**. Images that are sent to Agent Maverick are stored locally on the host's computer for either encryption or decryption to be done. The images are deleted from the host's computer when the user invokes the `Delete` function. `chatIDs` and `messageIDs` are stored to faciliate implementation of a Delete function which clears all sensitive text. The IDs are deleted subsequently. Due to a limitation on Telegram's part, messages can only be deleted if they were sent less than 48 hours ago. 
 
 We made use of custom keyboards instead of verbose commands to streamline user experience.
 
@@ -77,7 +77,7 @@ Decryption is performed similarly,
 $${\displaystyle D_{n}(x)=(x-n)\mod {26}.}$$
 
 ### Image Steganography
-Image steganographic functionalities are built with NumPy and opencv-python. We settled for NumPy because we are able to enjoy the flexibility of Python as well as the speed of compiled C code at its core. What is more is that NumPy indexing is the de facto standard of array computing today. OpenCV was another obvious choice for us as it is one of the famously used open-source Python libraries meant exclusively for Computer Vision. Modules and methods available in OpenCV allow us to perform image processing with a few lines of codes. We wanted to make use of this hackathon to learn a little more about Computer Vision techniques.
+Image steganographic functionalities are built with `NumPy` and `opencv-python`. We settled for NumPy because we are able to enjoy the flexibility of `Python` as well as the speed of compiled C code at its core. What is more is that NumPy indexing is the de facto standard of array computing today. `OpenCV` was another obvious choice for us as it is one of the famously used open-source `Python` libraries meant exclusively for Computer Vision. Modules and methods available in OpenCV allow us to perform image processing with a few lines of codes. We wanted to make use of this hackathon to learn a little more about Computer Vision techniques.
 
 ## Challenges we ran into
 We experimented with discrete cosine transform as our implementation for image steganography. Unfortunately, the resultant image has a tinge of a strange blue hue to it. As a result, we scrapped the our work and started from square 1 again. This time, we looked to modify the least significant bit of each pixel in the image. We are glad that the resultant image turned out to be indistinguishable from the original, at least to the human eye.
