@@ -33,7 +33,7 @@ Digital images may be described as a finite set of pixels. Pixels, are in turn d
 
 In the LSB approach, we replace the last bit of each pixel with each bit of our ciphertext. Each pixel contains 3 values: Red, Green and Blue. These values range from 0 to 255. By encryting and converting the secret message into binary, we interate over the pixel values 1 by 1, replacing each LSB with the ciphertext bits sequentially. Since we are only modifying pixel values by +1 or -1, any changes in the resultant image will be indistinguishable to the human eye.
 
-![Image steganography](images/Screenshot 2022-07-10 at 05.11.36.png "Least Significant Bits Approach")
+![Image steganography](images/image_steganography.png "Least Significant Bits Approach")
 
 ## How we built it
 
