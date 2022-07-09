@@ -37,7 +37,7 @@ Ever had the need to encrypt a message, but not want it to look painfully obviou
 We decided to create a Telegram bot as our end-user service interface because Telegram is a cross-platform messaging platform that is becoming increasingly popular. A Telegram bot would also suffice as a working proof of concept.
 
 ## What it does
-**Agent Maverick** is a Telegram bot that takes in an image alongside the secret message (ASCII characters) that the user intends to hide. We encrypt the secret message using Caesar cipher, then embed the ciphertext into the image provided via image steganography. The resultant image is then sent back to the user. 
+**Agent Maverick** is a Telegram bot that takes in a PNG (only) image alongside the secret message (ASCII characters) that the user intends to hide. We encrypt the secret message using Caesar cipher, then embed the ciphertext into the image provided via image steganography. The resultant image is then sent back to the user. 
 
 There are 2 key functionalities in our project:
 
@@ -46,7 +46,9 @@ It is a type of substitution cipher in which each letter in the plaintext is 'sh
 When encrypting, a person looks up each letter of the message in the "plain" line and writes down the corresponding letter in the "cipher" line.
 
 Plaintext:  THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+
 Ciphertext: QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD
+
 Deciphering is done in reverse, with a right shift of 3.
 
 ![Image steganography](images/1200px-Caesar_cipher_left_shift_of_3.svg.png "Caesar Cipher")
