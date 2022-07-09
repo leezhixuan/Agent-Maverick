@@ -1,8 +1,9 @@
 import cv2
 import types
 
-from cryptography import encryptWithAssymmetricKey, decryptWithAssymmetricKey
+from cryptography import encrypt_message, decrypt_message
 from utils import convertTextToBinary
+from bitstring import BitArray
 
 def encodeText(messageToHide, imageName): 
 
@@ -40,10 +41,12 @@ def hideData(image, secret_message):
 
     data_index = 0
     # convert input data to binary format using messageToBinary() fucntion
-    cipherText = encryptWithAssymmetricKey(secret_message)
+    cipherText = encrypt_message(secret_message)
+    binaryCipherText = BitArray(hex=cipherText)
     #binaryCipherText = convertTextToBinary(cipherText)
 
-    data_len = len(cipherText) #Find the length of data that needs to be hidden
+
+    data_len = len(binaryCipherText) #Find the length of data that needs to be hidden
     for values in image:
         for pixel in values:
             # convert RGB values to binary format
@@ -52,17 +55,17 @@ def hideData(image, secret_message):
             # modify the LSB only if there is still data to store
             if data_index < data_len:
                 # hide the data into LSB of the red pixel
-                pixel[0] = int(r[:-1] + cipherText[data_index], 2)
+                pixel[0] = int(r[:-1] + binaryCipherText[data_index], 2)
                 data_index += 1
 
             if data_index < data_len:
                 # hide the data into LSB of the green pixel
-                pixel[1] = int(g[:-1] + cipherText[data_index], 2)
+                pixel[1] = int(g[:-1] + binaryCipherText[data_index], 2)
                 data_index += 1
 
             if data_index < data_len:
                 # hide the data into LSB of the blue pixel
-                pixel[2] = int(b[:-1] + cipherText[data_index], 2)
+                pixel[2] = int(b[:-1] + binaryCipherText[data_index], 2)
                 data_index += 1
 
             # break out of the loop if there is no more data to hide
@@ -92,7 +95,7 @@ def showData(image):
         if decoded_data[-5:] == "#####": #check if we have reached the delimeter which is "#####"
             break
 
-    result = decryptWithAssymmetricKey(decoded_data[:-5])
+    result = decrypt_message(decoded_data[:-5])
 
     return result #remove the delimeter to show the original hidden message
 
