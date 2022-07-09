@@ -4,16 +4,13 @@ import telebot
 from telebot import types
 import requests
 from collections import defaultdict
+from steganography import encodeText, decodeText 
 
-# from dbIntegration import GoogleSheet
-# from User import User
-# gc = GoogleSheet() #Create googlesheet client
 
 load_dotenv()
 
-APIKey = os.getenv('APIKey')
-bot = telebot.TeleBot(APIKey)
-
+API_TOKEN = os.getenv('API_TOKEN')
+bot = telebot.TeleBot(API_TOKEN)
 
 messageIdDictionary = defaultdict(list)
 photoIdDictionary = defaultdict(list)
@@ -127,8 +124,8 @@ def recieveImage(message, state):
     elif message.content_type == "document":
         file_id = message.document.file_id
         file_info = bot.get_file(file_id)
-        file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(APIKey, file_info.file_path))
-        filename = "telegramBot/photosIn/" + file_id 
+        file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(API_TOKEN, file_info.file_path))
+        filename = "telegramBot/photosIn/"  + message.document.file_name  
         with open(filename, 'wb') as f:
             f.write(file.content)
         #Add filename to list to remove later
@@ -141,8 +138,8 @@ def recieveImage(message, state):
             #Append messageOutID
             messageIdDictionary[message.chat.id].append(messageOutId)
         if state == "Decrypt":
-            decodedMsg = decryptMessage(filename)
-            msg = bot.reply_to(message, f"Decoded Message is {decodedMsg}.") #The code to decrypt should be before this.
+            decrypted = decodeText(filename)
+            msg = bot.reply_to(message, f"Decoded Message is {decrypted}.") #The code to decrypt should be before this.
             messageOutId = msg.message_id
             # bot.register_next_step_handler(msg, decryptMessage, filename)
             #Append messageOutID
@@ -169,25 +166,14 @@ def handleEncryption(message,filename):
             messageOutId = bot.send_message(message.chat.id, f"Your message to be encrypted is {message.text}, and the photo is the following.").message_id
             messageIdDictionary[message.chat.id].append(messageOutId)
 
-            #Write function for encryption
-            outputFile = encryptImage(message.text,filename)
+            encodeText(message.text, filename)
+
             #Sends it back
             messageOutId = bot.send_document(message.chat.id, imageFile).message_id #Sents encrypted photo back
             messageIdDictionary[message.chat.id].append(messageOutId)
             #Prompts delete
             promptDelete(message.chat.id)
 
-def encryptImage(message:str, filename:str)->str:
-    """
-    Placeholder function that takes in a text str, filename and returns encoded image filename.
-    """
-    return filename
-   
-def decryptMessage(filename)->str:
-    """
-    Placeholder function that returns the decoded string
-    """
-    return "Sample decoded text"
 
 def clearChat(message):
     """
@@ -209,19 +195,9 @@ def clearLocalImages(chat_id):
         for photoFile in photoIdDictionary[chat_id]:
             os.remove(photoFile)
     photoIdDictionary[chat_id] = []
-# @bot.message_handler(commands=['privKey'])
-# def getPrivKey(message):
-#     privKey = message.text.split()[1]
-#     bot.send_message(message.chat.id, f"Your private key is {privKey}")
-    
-# @bot.message_handler(content_types=['photo'])
-# def handle_photo(message):
-#     bot.send_message(message.chat.id, "Photo recieved")
-
-# @bot.message_handler(func=lambda m: True)
-# def handle_photo(message):
-#     bot.send_message(message.chat.id, "Message recieved")
-
-
 bot.polling()
+
+
+
+
 
