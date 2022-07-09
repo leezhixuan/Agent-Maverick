@@ -28,7 +28,8 @@ Once the repo is cloned, create a .env file and insert the line below:
 Navigate to `telegramBot/telegramBot.py` and run the file. 
 
 Agent Maverick becomes live the moment the file is run.
-If you are facing issues hosting the bot, feel free to contact any of us via email and we can arrange a time to host the bot for you to test it out.
+We will be hosting the bot from 1200 to 1800 hours. Do give the bot time between messages. 
+If you are facing issues hosting the bot or using it during the period, feel free to contact any of us via email and we will look into it or arrange a time to host the bot for you to test it out.
 
 ## Inspiration
 Ever had the need to encrypt a message, but not want it to look painfully obvious that it has been encrypted? We do! From personal details to bank account numbers, there are plenty of instances where encryption comes in handy. It doesn't just end here in our project, Agent Maverick. In Agent Maverick, we take it a notch higher: encrypted messages are further embedded into images provided by end-users.
