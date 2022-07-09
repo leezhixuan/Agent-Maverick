@@ -31,6 +31,7 @@ def userOption(message):
     """
     Depending on whether user selects Encrypt or Decrypt, this will 
     """
+    state = None
     if message.text == 'Encrypt':
         #bot.send_message(message.chat.id, "Select and send an image.")
         state = 'Encrypt'
@@ -55,7 +56,7 @@ def recieveImage(message, state):
     """
     if message.content_type != "document":
         bot.send_message(message.chat.id, "Wrong image file, please select and send an image as a file.")
-        bot.register_next_step_handler(message,recieveImage)
+        bot.register_next_step_handler(message, recieveImage, state)
         messageIdList.append(message.message_id)
     elif message.content_type == "document":
 
