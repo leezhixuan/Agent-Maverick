@@ -1,6 +1,5 @@
-# lifehack22-PrBros
-LifeHack 2022 
-
+# Lifehack 2022
+Team: PR Bros
 
 # Set up Python Virtual Environment 
 - `python3 -m pip install --user virtualenv`
