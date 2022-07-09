@@ -39,11 +39,11 @@ In the LSB approach, we replace the last bit of each pixel with each bit of our 
 
 Due to the simplicity of the cipher, we were able to write the encryption and decryption functions of the Caesar cipher from scratch. The encryption can also be represented using modular arithmetic by first transforming the letters into numbers, according to the scheme, A → 0, B → 1, ..., Z → 25. Encryption of a letter x by a shift n can be described mathematically as,
 
-{\displaystyle E_{n}(x)=(x+n)\mod {26}.}E_{n}(x)=(x+n)\mod {26}.
+$${\displaystyle E_{n}(x)=(x+n)\mod {26}.}E_{n}(x)=(x+n)\mod {26}$$
 
 Decryption is performed similarly,
 
-{\displaystyle D_{n}(x)=(x-n)\mod {26}.}D_{n}(x)=(x-n)\mod {26}.
+$${\displaystyle D_{n}(x)=(x-n)\mod {26}.}D_{n}(x)=(x-n)\mod {26}$$
 
 ### Image Steganography
 Image steganographic functionalities are built with NumPy and opencv-python. We settled for NumPy because we are able to enjoy the flexibility of Python as well as the speed of compiled C code at its core. What is more is that NumPy indexing is the de facto standard of array computing today. OpenCV was another obvious choice for us as it is one of the famously used open-source Python libraries meant exclusively for Computer Vision. Modules and methods available in OpenCV allow us to perform image processing with a few lines of codes. We wanted to make use of this hackathon to learn a little more about Computer Vision techniques.
