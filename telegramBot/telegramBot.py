@@ -147,7 +147,7 @@ def recieveImage(message, state):
             if decrypted == "not done":
                 msg = bot.reply_to(message, f"❌❌ Image is not encoded yet ❌❌ \nPlease encrypt the image first.")
             else:
-                msg = bot.reply_to(message, f"✅ Decoded Message is {decrypted}. ✅") 
+                msg = bot.reply_to(message, f"✅ Decoded Message is: \n {decrypted} ") 
             messageOutId = msg.message_id
             # bot.register_next_step_handler(msg, decryptMessage, filename)
             #Append messageOutID
