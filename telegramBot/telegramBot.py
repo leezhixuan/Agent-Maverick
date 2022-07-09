@@ -56,7 +56,7 @@ def recieveImage(message, state):
     """
     if message.content_type != "document":
         bot.send_message(message.chat.id, "Wrong image file, please select and send an image as a file.")
-        bot.register_next_step_handler(message, recieveImage, state)
+        bot.register_next_step_handler(message, recieveImage)
         messageIdList.append(message.message_id)
     elif message.content_type == "document":
 
