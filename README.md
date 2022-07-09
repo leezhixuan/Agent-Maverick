@@ -15,7 +15,9 @@
 - `python3 -m pip install --user virtualenv`
 - `python3 -m venv env`
 - `source env/bin/activate`
-- To leave: `deactivate` 
+- To leave: `deactivate`
+- `pip3 install -r requirements.txt` 
+ 
 
 ## How to bring Agent Maverick alive
 First, get an Telegram bot API key from @BotFather. 
