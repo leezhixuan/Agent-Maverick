@@ -18,7 +18,7 @@ We decided to create a Telegram bot as our end user service interface because Te
 
 There are 2 key functionalities in our project:
 
-### Cryptography (Caesar Cipher [to be replaced with a more effective encryption scheme in future development])
+### Cryptography (Caesar Cipher)
 It is a type of substitution cipher in which each letter in the plaintext is 'shifted' a certain number of places down the alphabet. For example, with a shift of 1, A would be replaced by B, B would become C, and so on. It is a type of substitution cipher in which each letter in the plaintext is 'shifted' a certain number of places down the alphabet. For example, with a shift of 1, A would be replaced by B, B would become C, and so on.
 When encrypting, a person looks up each letter of the message in the "plain" line and writes down the corresponding letter in the "cipher" line.
 
@@ -26,17 +26,20 @@ Plaintext:  THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
 Ciphertext: QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD
 Deciphering is done in reverse, with a right shift of 3.
 
+![Image steganography](images/1200px-Caesar_cipher_left_shift_of_3.svg.png "Caesar Cipher")
+
 ### Image Steganography (Least Significant Bit (LSB) Approach)
 Digital images may be described as a finite set of pixels. Pixels, are in turn defined to be the smallest individual element of an image. They hold values to represent the brightness of a given colour at any specific point. As such, we can think of images as a matrix of pixels.
 
 In the LSB approach, we replace the last bit of each pixel with each bit of our ciphertext. Each pixel contains 3 values: Red, Green and Blue. These values range from 0 to 255. By encryting and converting the secret message into binary, we interate over the pixel values 1 by 1, replacing each LSB with the ciphertext bits sequentially. Since we are only modifying pixel values by +1 or -1, any changes in the resultant image will be indistinguishable to the human eye.
+
+![Image steganography](images/Screenshot 2022-07-10 at 05.11.36.png "Least Significant Bits Approach")
 
 ## How we built it
 
 ### Telegram Bot
 
 ### Cryptography
-
 Due to the simplicity of the cipher, we were able to write the encryption and decryption functions of the Caesar cipher from scratch. The encryption can also be represented using modular arithmetic by first transforming the letters into numbers, according to the scheme, A → 0, B → 1, ..., Z → 25. Encryption of a letter x by a shift n can be described mathematically as,
 
 $${\displaystyle E_{n}(x)=(x+n)\mod {26}.}$$
