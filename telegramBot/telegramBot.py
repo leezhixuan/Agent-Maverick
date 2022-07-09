@@ -41,7 +41,7 @@ def start(message):
         itembtn1 = types.KeyboardButton("Encrypt")
         itembtn2 = types.KeyboardButton("Decrypt")
         markup.add(itembtn1,itembtn2)
-        messageOutId = bot.send_message(message.chat.id, "Welcome to Steganography bot.🤖 Please choose an option below☺️. Use /start at anytime to restart the process.🔁 ", reply_markup=markup).message_id
+        messageOutId = bot.send_message(message.chat.id, "🤖Welcome to Steganography bot.🤖 Please choose an option below.☺️ Use /start at anytime to restart the process.🔁 ", reply_markup=markup).message_id
         #Append messageOutID
         messageIdDictionary[message.chat.id].append(messageOutId)
 
@@ -57,7 +57,7 @@ def userOption(message):
     if message.text == 'Encrypt':
         #bot.send_message(message.chat.id, "Select and send an image.")
         state = 'Encrypt'
-        msg = bot.reply_to(message,"Please select and send an [uncompressed] image.🤖" )
+        msg = bot.reply_to(message,"🤖 Please select and send an [uncompressed] image 🤖" )
         messageOutId = msg.message_id
         bot.register_next_step_handler(msg, recieveImage, state)
         #Append messageOutID
@@ -65,7 +65,7 @@ def userOption(message):
 
     elif message.text == "Decrypt":
         state = "Decrypt"
-        msg = bot.reply_to(message,"Please select and send an secret [uncompressed] image.🤖")
+        msg = bot.reply_to(message,"🤖 Please select and send an secret [uncompressed] image 🤖")
         messageOutId = msg.message_id
         bot.register_next_step_handler(msg, recieveImage, state)
         #Append messageOutID
@@ -76,7 +76,7 @@ def userOption(message):
     elif message.text =="Start":
         start(message)
     else:
-        messageOutId = bot.send_message(message.chat.id, "Please use /start again.🤖").message_id
+        messageOutId = bot.send_message(message.chat.id, "🤖 Please use /start again 🤖").message_id
         #Append messageOutID
         messageIdDictionary[message.chat.id].append(messageOutId)
 
@@ -90,7 +90,7 @@ def promptDelete(chat_id):
     itembtn1 = types.KeyboardButton("Start")
     itembtn2 = types.KeyboardButton("Delete")
     markup.add(itembtn1,itembtn2)
-    messageOutId = bot.send_message(chat_id, "After you are done, please clear the chat WITHIN 48 hours.🤖 Ps: We wanna keep your secrets safe!🤫 ", reply_markup=markup).message_id
+    messageOutId = bot.send_message(chat_id, "After you are done, please clear the chat WITHIN 48 hours 🤖 \nPs: We wanna keep your secrets safe!🤫 ", reply_markup=markup).message_id
     messageIdDictionary[chat_id].append(messageOutId)
 
 def recieveImage(message, state):
@@ -104,25 +104,25 @@ def recieveImage(message, state):
     if message.content_type == "text":
         if message.text == "Encrypt":
             state = 'Encrypt'
-            msg = bot.reply_to(message, "Please select and send an secret [uncompressed] image.🤖")
+            msg = bot.reply_to(message, "Please select and send an secret [uncompressed] image 🤖")
             messageOutId = msg.message_id
             bot.register_next_step_handler(msg, recieveImage, state)
             #Append messageOutID
             messageIdDictionary[message.chat.id].append(messageOutId)
         elif message.text == "Decrypt":
             state = "Decrypt"
-            msg = bot.reply_to(message, "Please select and send an secret [uncompressed] image.🤖")
+            msg = bot.reply_to(message, "Please select and send an secret [uncompressed] image 🤖")
             messageOutId = msg.message_id
             bot.register_next_step_handler(msg, recieveImage, state)
             #Append messageOutID
             messageIdDictionary[message.chat.id].append(messageOutId)
         else:
-            msg = bot.reply_to(message, "Invalid input.❌ Please use /start again.🔁")
+            msg = bot.reply_to(message, "❌ Invalid input ❌ Please use /start again 🔁")
             messageOutId = msg.message_id
             messageIdDictionary[message.chat.id].append(messageOutId)
 
     elif message.content_type != "document":
-        messageOutId =bot.send_message(message.chat.id, "❌❌❌ Wrong image file ❌❌❌. Please select and send an image as a file.").message_id
+        messageOutId =bot.send_message(message.chat.id, "❌❌ Wrong image file ❌❌ \nPlease select and send an image as a file.").message_id
         messageIdDictionary[message.chat.id].append(messageOutId)
         bot.register_next_step_handler(message,recieveImage, state)
 
@@ -137,7 +137,7 @@ def recieveImage(message, state):
         photoIdDictionary[message.chat.id].append(filename)
 
         if state == "Encrypt":
-            msg = bot.reply_to(message, "✅✅✅Photo file received✅✅✅. Please key in your secret message now. 👀 Or use /start to restart the process.🔁 ")
+            msg = bot.reply_to(message, "✅ Photo file received ✅ \nPlease key in your secret message now 👀 \nOr use /start to restart the process 🔁 ")
             messageOutId = msg.message_id
             bot.register_next_step_handler(msg, handleEncryption, filename)
             #Append messageOutID
@@ -145,9 +145,9 @@ def recieveImage(message, state):
         if state == "Decrypt":
             decrypted = decodeText(filename)
             if decrypted == "not done":
-                msg = bot.reply_to(message, f"❌❌❌Image is not encoded yet❌❌❌. Please encrypt the image first.")
+                msg = bot.reply_to(message, f"❌❌ Image is not encoded yet ❌❌ \nPlease encrypt the image first.")
             else:
-                msg = bot.reply_to(message, f"✅✅✅Decoded Message is {decrypted}.✅✅✅") 
+                msg = bot.reply_to(message, f"✅ Decoded Message is {decrypted}. ✅") 
             messageOutId = msg.message_id
             # bot.register_next_step_handler(msg, decryptMessage, filename)
             #Append messageOutID
@@ -161,7 +161,7 @@ def handleEncryption(message,filename):
     Gets both message to be encrypted and image, returns the image.
     """
     if message.content_type != 'text':
-        msg = bot.reply_to(message, "❌❌❌Invalid input❌❌❌. Please use /start again.")
+        msg = bot.reply_to(message, "❌❌ Invalid input ❌❌ \nPlease use /start again.🔁")
         messageOutId = msg.message_id
         messageIdDictionary[message.chat.id].append(messageOutId)
     if message.content_type == "text":
@@ -193,7 +193,7 @@ def clearChat(message):
         try:
             bot.delete_message(chat_id,id)
         except:
-            continue
+            continue 
     messageIdDictionary[chat_id] = []
     clearLocalImages(chat_id)
 
