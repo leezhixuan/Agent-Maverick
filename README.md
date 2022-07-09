@@ -9,12 +9,12 @@ LifeHack 2022
 - To leave: `deactivate` 
 
 ## Inspiration
-Ever had the need to encrypt a message, but not wanting it to look painfully obvious that it has been encrypted? We do! From personal details to bank account numbers, there are plenty of instances where encryption comes in handy. It doesn't just end here in our project. In our project, we take it a notch higher.
+Ever had the need to encrypt a message, but not wanting it to look painfully obvious that it has been encrypted? We do! From personal details to bank account numbers, there are plenty of instances where encryption comes in handy. It doesn't just end here in our project, Agent Maverick. In Agent Maverick, we take it a notch higher.
 
 We decided to create a Telegram bot as our end user service interface because Telegram is a cross-platform messaging platform that is becoming increasingly popular. A Telegram bot would also suffice as a working proof of concept.
 
 ## What it does
-{Project Name} is a Telegram bot that takes in an image alongside the secret message that the user intends to hide. We encrypt the secret message using {technique} then embed the ciphertext into the image provided via image steganography. The resultant image is then sent back to the user. 
+Agent Maverick is a Telegram bot that takes in an image alongside the secret message (ASCII characters) that the user intends to hide. We encrypt the secret message using Caesar cipher, then embed the ciphertext into the image provided via image steganography. The resultant image is then sent back to the user. 
 
 There are 2 key functionalities in our project:
 
@@ -40,6 +40,11 @@ In the LSB approach, we replace the last bit of each pixel with each bit of our 
 ## How we built it
 
 ### Telegram Bot
+We utilised the pyTelegramBotAPI library to build Agent Maverick. Images that are sent to Agent Maverick are stored locally on the host's computer for either encryption or decryption to be done. The images are deleted from the host's computer when the user invokes the Delete function. chatIDs and messageIDs are stored to faciliate implementation of a Delete function which clears all sensitive text. The IDs are deleted subsequently. Due to a limitation on Telegram's part, messages can only be deleted if they were sent less than 48 hours ago. 
+
+We made use of custom keyboards instead of verbose commands to streamline user experience.
+
+We are also proud to announce that Agent Maverick is capable of supporting multiple users at the same time.
 
 ### Cryptography
 Due to the simplicity of the cipher, we were able to write the encryption and decryption functions of the Caesar cipher from scratch. The encryption can also be represented using modular arithmetic by first transforming the letters into numbers, according to the scheme, A → 0, B → 1, ..., Z → 25. Encryption of a letter x by a shift n can be described mathematically as,
