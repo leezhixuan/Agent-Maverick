@@ -1,5 +1,12 @@
-# Lifehack 2022
-Team: PR Bros
+<p align="center">
+    <h1 align="center"> Agent Maverick </h1>
+</p>
+
+<p align="center">
+    <img src="images/photo_2022-07-10_05-40-26.jpg" />
+</p>
+
+### lifehack22-PrBros (Life Hack 2022)
 
 # Set up Python Virtual Environment 
 - `python3 -m pip install --user virtualenv`
@@ -8,7 +15,7 @@ Team: PR Bros
 - To leave: `deactivate` 
 
 ## Inspiration
-Ever had the need to encrypt a message, but not wanting it to look painfully obvious that it has been encrypted? We do! From personal details to bank account numbers, there are plenty of instances where encryption comes in handy. It doesn't just end here in our project, Agent Maverick. In Agent Maverick, we take it a notch higher.
+Ever had the need to encrypt a message, but not wanting it to look painfully obvious that it has been encrypted? We do! From personal details to bank account numbers, there are plenty of instances where encryption comes in handy. It doesn't just end here in our project, Agent Maverick. In Agent Maverick, we take it a notch higher: encrypted messages are further embedded into images provided by end users.
 
 We decided to create a Telegram bot as our end user service interface because Telegram is a cross-platform messaging platform that is becoming increasingly popular. A Telegram bot would also suffice as a working proof of concept.
 
