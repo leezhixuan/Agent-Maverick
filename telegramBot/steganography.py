@@ -92,6 +92,9 @@ def showData(image):
             break
     
     # result = decrypt_message(decoded_data[:-5])
+    if "@@@@@" not in decoded_data[:-5]: 
+        return "not done"
+
     result = ascii_caesar_shift_back(decoded_data[:-5].split("@@@@@")[1], int(decoded_data[:-5].split("@@@@@")[0]))
 
     return result #remove the delimeter to show the original hidden message
