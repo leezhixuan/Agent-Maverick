@@ -8,7 +8,7 @@
 
 <p align="center">
     <h3 align="center"> Telegram handle: @stegEncryptBot </h3>  
-    <h4 align="center"> lifehack22-PrBros (Life Hack 2022) </h4>
+    <h4 align="center"> lifehack22-PrBros (LifeHack 2022) </h4>
 </p>
 
 ## Set up Python Virtual Environment 
