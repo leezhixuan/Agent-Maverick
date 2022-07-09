@@ -9,9 +9,8 @@ from steganography import encodeText, decodeText
 
 load_dotenv()
 
-APIKey = os.getenv('APIKey')
-bot = telebot.TeleBot(APIKey)
-
+API_TOKEN = os.getenv('API_TOKEN')
+bot = telebot.TeleBot(API_TOKEN)
 
 messageIdDictionary = defaultdict(list)
 photoIdDictionary = defaultdict(list)
@@ -125,7 +124,7 @@ def recieveImage(message, state):
     elif message.content_type == "document":
         file_id = message.document.file_id
         file_info = bot.get_file(file_id)
-        file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(APIKey, file_info.file_path))
+        file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(API_TOKEN, file_info.file_path))
         filename = "telegramBot/photosIn/"  + message.document.file_name  
         with open(filename, 'wb') as f:
             f.write(file.content)
@@ -139,8 +138,8 @@ def recieveImage(message, state):
             #Append messageOutID
             messageIdDictionary[message.chat.id].append(messageOutId)
         if state == "Decrypt":
-            decodedMsg = decryptMessage(filename)
-            msg = bot.reply_to(message, f"Decoded Message is {decodedMsg}.") #The code to decrypt should be before this.
+            decrypted = decodeText(filename)
+            msg = bot.reply_to(message, f"Decoded Message is {decrypted}.") #The code to decrypt should be before this.
             messageOutId = msg.message_id
             # bot.register_next_step_handler(msg, decryptMessage, filename)
             #Append messageOutID
@@ -167,32 +166,13 @@ def handleEncryption(message,filename):
             messageOutId = bot.send_message(message.chat.id, f"Your message to be encrypted is {message.text}, and the photo is the following.").message_id
             messageIdDictionary[message.chat.id].append(messageOutId)
 
-            #Write function for encryption
-            outputFile = encryptImage(message.text,filename)
+            encodeText(message.text, filename)
+
             #Sends it back
             messageOutId = bot.send_document(message.chat.id, imageFile).message_id #Sents encrypted photo back
             messageIdDictionary[message.chat.id].append(messageOutId)
             #Prompts delete
             promptDelete(message.chat.id)
-
-def encryptImage(message, filename):
-    """
-    Gets both message to be encrypted and image, returns the image.
-    """
-    imageFile = open(filename, 'rb')
-    encodeText(message.text, filename)
-    bot.send_message(message.chat.id, f"Your message to be encrypted is {message.text}, and the photo is the following.")
-    bot.send_document(message.chat.id, imageFile) #Sents encrypted photo back
-    messageIdDictionary[message.chat.id].append(message.message_id)
-    #clearChat(message)
-    
-def decryptMessage(message, filename):
-    """
-    Need to write a function that decrypts the thing and sends it back.
-    """
-    decrypted = decodeText(filename)
-    messageIdDictionary[message.chat.id].append(message.message_id)
-    return decrypted
 
 
 def clearChat(message):
