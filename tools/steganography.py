@@ -1,8 +1,9 @@
 import cv2
 import types
 
-from cryptography import encryptWithSymmetricKey, decryptWithSymmetricKey
+from cryptography import encrypt_message, decrypt_message
 from utils import convertTextToBinary
+from bitstring import BitArray
 
 def encodeText(messageToHide, imageName): 
 
@@ -40,8 +41,10 @@ def hideData(image, secret_message):
 
     data_index = 0
     # convert input data to binary format using messageToBinary() fucntion
-    cipherText = encryptWithSymmetricKey(secret_message)
-    binaryCipherText = convertTextToBinary(cipherText)
+    cipherText = encrypt_message(secret_message)
+    binaryCipherText = BitArray(hex=cipherText)
+    #binaryCipherText = convertTextToBinary(cipherText)
+
 
     data_len = len(binaryCipherText) #Find the length of data that needs to be hidden
     for values in image:
@@ -92,7 +95,7 @@ def showData(image):
         if decoded_data[-5:] == "#####": #check if we have reached the delimeter which is "#####"
             break
 
-    result = decryptWithSymmetricKey(decoded_data[:-5])
+    result = decrypt_message(decoded_data[:-5])
 
     return result #remove the delimeter to show the original hidden message
 

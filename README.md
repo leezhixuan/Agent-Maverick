@@ -6,7 +6,7 @@ LifeHack 2022
 - `python3 -m pip install --user virtualenv`
 - `python3 -m venv env`
 - `source env/bin/activate`
-To leave: `deactivate` 
+- To leave: `deactivate` 
 
 ## Inspiration
 Ever had the need to encrypt a message, but not wanting it to look painfully obvious that it has been encrypted? We do! From personal details to bank account numbers, there are plenty of instances where encryption comes in handy. It doesn't just end here in our project. In our project, we take it a notch higher.
