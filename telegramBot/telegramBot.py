@@ -122,7 +122,7 @@ def recieveImage(message, state):
     elif message.content_type != "document":
         messageOutId =bot.send_message(message.chat.id, "Wrong image file, please select and send an image as a file.").message_id
         messageIdDictionary[message.chat.id].append(messageOutId)
-        bot.register_next_step_handler(message,recieveImage)
+        bot.register_next_step_handler(message,recieveImage, state)
 
     elif message.content_type == "document":
         file_id = message.document.file_id
@@ -142,7 +142,10 @@ def recieveImage(message, state):
             messageIdDictionary[message.chat.id].append(messageOutId)
         if state == "Decrypt":
             decrypted = decodeText(filename)
-            msg = bot.reply_to(message, f"Decoded Message is {decrypted}.") #The code to decrypt should be before this.
+            if decrypted == "not done":
+                msg = bot.reply_to(message, f"Image is not encoded yet. Please encrypt the image first.")
+            else:
+                msg = bot.reply_to(message, f"Decoded Message is {decrypted}.") 
             messageOutId = msg.message_id
             # bot.register_next_step_handler(msg, decryptMessage, filename)
             #Append messageOutID
@@ -203,7 +206,6 @@ def clearLocalImages(chat_id):
 
 
 bot.polling()
-
 
 
 
