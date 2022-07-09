@@ -6,7 +6,9 @@
     <img src="images/photo_2022-07-10_05-40-26.jpg" />
 </p>
 
-### lifehack22-PrBros (Life Hack 2022)
+<p align="center">
+    <h4 align="center"> lifehack22-PrBros (Life Hack 2022) </h4>
+</p>
 
 # Set up Python Virtual Environment 
 - `python3 -m pip install --user virtualenv`
