@@ -35,7 +35,7 @@ Ever had the need to encrypt a message, but not wanting it to look painfully obv
 We decided to create a Telegram bot as our end user service interface because Telegram is a cross-platform messaging platform that is becoming increasingly popular. A Telegram bot would also suffice as a working proof of concept.
 
 ## What it does
-Agent Maverick is a Telegram bot that takes in an image alongside the secret message (ASCII characters) that the user intends to hide. We encrypt the secret message using Caesar cipher, then embed the ciphertext into the image provided via image steganography. The resultant image is then sent back to the user. 
+**Agent Maverick** is a Telegram bot that takes in an image alongside the secret message (ASCII characters) that the user intends to hide. We encrypt the secret message using Caesar cipher, then embed the ciphertext into the image provided via image steganography. The resultant image is then sent back to the user. 
 
 There are 2 key functionalities in our project:
 
