@@ -95,4 +95,6 @@ def showData(image):
     result = decryptWithSymmetricKey(decoded_data[:-5])
 
     return result #remove the delimeter to show the original hidden message
+
+    
           

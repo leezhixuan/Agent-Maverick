@@ -10,4 +10,6 @@ def convertTextToBinary(text):
         return format(text, "08b")
     else:
         raise TypeError("Input type not supported")
+
+        
         

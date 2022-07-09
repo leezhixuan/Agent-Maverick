@@ -3,3 +3,4 @@ def encryptWithSymmetricKey(text):
 
 def decryptWithSymmetricKey(ciphertext):
     pass
+
