@@ -92,3 +92,5 @@ From discrete cosine transforms to replacing the least significant bits in the p
 
 ## What's next for Agent Maverick
 We hope that we will be to able to include an array of encryption methods for the users to choose from to encrypt their secret messages before embedding them into images. A few notable encryption schemes that we hope to integrate into our Telegram bot are AES, RSA, Vignere cipher as well as the keyword cipher. On top of that, we are looking to allow users to opt for audio steganography as well. For that, we plan to rely on Fourier Transforms to achieve the desired outcome.
+
+Additionally, we hope to deploy it on heroku such that Agent Maverick is available for everyone who needs it. Apart from that, we are looking to store text messages and images on the cloud. We believe that Amazon S3 would be perfect for this job.
