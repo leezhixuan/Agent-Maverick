@@ -1,4 +1,11 @@
-# Agent Maverick
+<p align="center">
+    <h1 align="center"> Agent Maverick </h1>
+</p>
+
+<p align="center">
+    <img src="images/photo_2022-07-10_05-40-26.jpg" />
+</p>
+
 ### lifehack22-PrBros (Life Hack 2022)
 
 # Set up Python Virtual Environment 
