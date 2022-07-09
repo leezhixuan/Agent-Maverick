@@ -71,6 +71,8 @@ def userOption(message):
 
     elif message.text == "Delete":
         clearChat(message)
+    elif message.text =="Start":
+        start(message)
     else:
         messageOutId = bot.send_message(message.chat.id, "Please use /start again.").message_id
         #Append messageOutID
@@ -82,8 +84,9 @@ def promptDelete(chat_id):
     """
     #Send custom keyboard.
     markup = types.ReplyKeyboardMarkup(row_width=1, one_time_keyboard=True)
-    itembtn1 = types.KeyboardButton("Delete")
-    markup.add(itembtn1)
+    itembtn1 = types.KeyboardButton("Start")
+    itembtn2 = types.KeyboardButton("Delete")
+    markup.add(itembtn1,itembtn2)
     messageOutId = bot.send_message(chat_id, "After you are done, please clear the chat WITHIN 48 hours.", reply_markup=markup).message_id
     #Append messageOutID
     messageIdDictionary[chat_id].append(messageOutId)
@@ -180,8 +183,11 @@ def clearChat(message):
     Telegram API does not allow you to clear chat with a bot, hence this just a reminder to clear the chat for the user.
     """ 
     chat_id = message.chat.id
-    for id in messageIdDictionary[chat_id]:
-        bot.delete_message(chat_id,id)
+    for id in messageIdDictionary[chat_id][2:]:
+        try:
+            bot.delete_message(chat_id,id)
+        except:
+            continue
     messageIdDictionary[chat_id] = []
     clearLocalImages(chat_id)
 
@@ -195,6 +201,7 @@ def clearLocalImages(chat_id):
         for photoFile in photoIdDictionary[chat_id]:
             os.remove(photoFile)
     photoIdDictionary[chat_id] = []
+
 bot.polling()
 
 
