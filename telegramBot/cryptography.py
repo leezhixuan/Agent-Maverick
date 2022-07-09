@@ -7,6 +7,10 @@ import os
 publicKey, privateKey = None, None
 nonce = None
 
+####################################
+### SYMMETRIC KEY IMPLEMENTATION ###
+####################################
+
 def generate_secret_key_for_AES_cipher():
     AES_key_length = 16  # use larger value in production
     secret_key = os.urandom(AES_key_length)
@@ -20,22 +24,26 @@ def encrypt_message(private_msg):
     nonce = cipher.nonce
     encoded_message = str.encode(private_msg)
     ciphertext, tag = cipher.encrypt_and_digest(encoded_message)
-    keyCiphertext = b'secret_key%*' + ciphertext
+
+    keyCiphertext = secret_key + b'%*' + ciphertext
 
     print("Recevied Secret Message: " + private_msg)
     print(b'Private Key generated: ' + secret_key)
     print(b'Key + ciphertext: ' + keyCiphertext) 
     return keyCiphertext, tag
 
-def decrypt_message(ciphertext, encoded_secret_key, tag):
-    cipher = AES.new(encoded_secret_key, AES.MODE_EAX, nonce=nonce)
+def decrypt_message(ciphertext):
+    ciphertextArr = ciphertext.split(b'%*')
+    cipher = AES.new(ciphertextArr[0], AES.MODE_EAX, nonce=nonce)
     plaintext = cipher.decrypt(ciphertext)
-    try:
-        cipher.verify(tag)
-        print("The message is authentic:", plaintext)
-    except ValueError:
-        print("Key incorrect or message corrupted")  
     return plaintext
+
+    # try:
+    #     cipher.verify(tag)
+    #     print("The message is authentic:", plaintext)
+    # except ValueError:
+    #     print("Key incorrect or message corrupted")  
+    # return plaintext
 
 
 # #Example Run 

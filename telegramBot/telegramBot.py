@@ -1,9 +1,6 @@
 import os
 import telebot
 import requests
-import sys
-
-sys.path.insert(0, '/Users/eqxy/Desktop/Code/lifehack22-PrBros/tools')
 
 from dotenv import load_dotenv
 from telebot import types
@@ -65,7 +62,9 @@ def recieveImage(message, state):
         file_id = message.document.file_id
         file_info = bot.get_file(file_id)
         file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(API_TOKEN, file_info.file_path))
-        filename = "telegramBot/photosIn/" + file_id  + ".jpg"
+        print(message.document.file_name)
+        filename = "telegramBot/photosIn/" + message.document.file_name # change the file thingy 
+        print(filename)
         with open(filename, 'wb') as f:
             f.write(file.content)
         print(state)
@@ -94,9 +93,9 @@ def decryptMessage(message, filename):
     """
     Need to write a function that decrypts the thing and sends it back.
     """
-    imageFile = open(filename, 'rb')
-    decodeText(filename)
+    decrypted = decodeText(filename)
     messageIdList.append(message.message_id)
+    return decrypted
 
 
 @bot.message_handler(commands=['delete'])
@@ -106,19 +105,6 @@ def clearChat(message):
     """
     for id in messageIdList:
         bot.delete_message(message.chat.id,id)
-# @bot.message_handler(commands=['privKey'])
-# def getPrivKey(message):
-#     privKey = message.text.split()[1]
-#     bot.send_message(message.chat.id, f"Your private key is {privKey}")
-    
-# @bot.message_handler(content_types=['photo'])
-# def handle_photo(message):
-#     bot.send_message(message.chat.id, "Photo recieved")
-
-# @bot.message_handler(func=lambda m: True)
-# def handle_photo(message):
-#     bot.send_message(message.chat.id, "Message recieved")
-
 
 bot.polling()
 

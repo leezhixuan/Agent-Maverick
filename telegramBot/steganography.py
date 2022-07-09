@@ -14,8 +14,7 @@ def encodeText(messageToHide, imageName):
     
     # # we try to return the image rather than saving it somewhere
     # filename = input("Enter the name of new encoded image(with extension): ") 
-    # cv2.imwrite(filename, encoded_image) 
-    
+    cv2.imwrite(imageName, encoded_image) 
     return encoded_image
 
 def decodeText(imageName):
@@ -98,5 +97,3 @@ def showData(image):
     print(result)
 
     return result #remove the delimeter to show the original hidden message
-
-
