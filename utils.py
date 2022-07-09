@@ -11,5 +11,4 @@ def convertTextToBinary(text):
     else:
         raise TypeError("Input type not supported")
 
-        
-        
+

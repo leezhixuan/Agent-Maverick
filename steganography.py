@@ -96,5 +96,4 @@ def showData(image):
 
     return result #remove the delimeter to show the original hidden message
 
-    
-          
+
