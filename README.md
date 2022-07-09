@@ -7,14 +7,25 @@
 </p>
 
 <p align="center">
+    <h3 align="center"> Telegram handle: @stegEncryptBot </h3>  
     <h4 align="center"> lifehack22-PrBros (Life Hack 2022) </h4>
 </p>
 
-# Set up Python Virtual Environment 
+## Set up Python Virtual Environment 
 - `python3 -m pip install --user virtualenv`
 - `python3 -m venv env`
 - `source env/bin/activate`
 - To leave: `deactivate` 
+
+## How to bring Agent Maverick alive
+First, get an Telegram bot API key from @BotFather. 
+Once the repo is cloned, create an .env file and insert the line below:
+
+```API_TOKEN = 'INSERT API TOKEN HERE'```
+
+Navigate to telegramBot/telegramBot.py and run the file. 
+
+Agent Maverick becomes live the moment the file is run.
 
 ## Inspiration
 Ever had the need to encrypt a message, but not wanting it to look painfully obvious that it has been encrypted? We do! From personal details to bank account numbers, there are plenty of instances where encryption comes in handy. It doesn't just end here in our project, Agent Maverick. In Agent Maverick, we take it a notch higher: encrypted messages are further embedded into images provided by end users.
@@ -72,10 +83,10 @@ We experimented with discrete cosine transform as our implementation for image s
 As it was our first time working with complex cryptographic methodologies such as the AES and the RSA, it was unfortunate that we were unable to overcome this obstacle head-on. Instead, we found a workaround to the issue. By turning to the simpler Caesar cipher, we were able to come up with a working product to serve as a working proof of concept. We believe this is the most rational way forward.
 
 ## Accomplishments that we're proud of
-We are immensely proud of the fact that we were able to come up with a working product under 2 hours that has viable use cases in the real world. On hindsight, we felt that we handled obstacles along the way really well despite treading into unknown waters. Regardless of the outcome of the competition, we are glad that we will be walking away with new found knowledge in the field of computer science.
+We are immensely proud of the fact that we were able to come up with a working product under 24 hours that has viable use cases in the real world. On hindsight, we felt that we handled obstacles along the way really well despite treading into unknown waters. Regardless of the outcome of the competition, we are glad that we will be walking away with new found knowledge in the field of computer science.
 
 ## What we learned
 From discrete cosine transforms to replacing the least significant bits in the pixels, we learnt a ton about image steganography and the mathematical intuition behind it. We thought it was a great introduction to the subject of media computing. We are also glad that we decided on the security theme, for it enabled us to learn more about modern cryptographic concepts; their performances, their effectiveness, as well as their tradeoffs. 
 
-## What's next for Untitled
+## What's next for Agent Maverick
 We hope that we will be to able to include an array of encryption methods for the users to choose from to encrypt their secret messages before embedding them into images. A few notable encryption schemes that we hope to integrate into our Telegram bot are AES, RSA, Vignere cipher as well as the keyword cipher. On top of that, we are looking to allow users to opt for audio steganography as well. For that, we plan to rely on Fourier Transforms to achieve the desired outcome.
