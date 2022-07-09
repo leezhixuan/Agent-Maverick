@@ -5,31 +5,30 @@ from cryptography import ascii_caesar_shift, ascii_caesar_shift_back
 from utils import convertTextToBinary
 from bitstring import BitArray
 
-def encodeText(messageToHide, imageName): 
+def encodeText(messageToHide, filePathName): 
     if (len(messageToHide) == 0): 
         raise ValueError('Data is empty')
-    #image name (with extension), i think we provide the image path to telegram bot right? idk
-    image = cv2.imread(imageName) # Read the input image using OpenCV-Python.
+    image = cv2.imread(filePathName) # Read the input image using OpenCV-Python.
+
+    # Generate important variables to encrypt the message 
     key = random.randint(1, 127)
     cipher = ascii_caesar_shift(messageToHide, key) 
     messageToHide = str(key) + "@@@@@" + cipher
-    encoded_image = hideData(imageName, image, messageToHide) # call the hideData function to hide the secret message into the selected image
-    
-    # # we try to return the image rather than saving it somewhere
-    # filename = input("Enter the name of new encoded image(with extension): ") 
-    cv2.imwrite(imageName, encoded_image) 
+    encoded_image = hideData(filePathName, image, messageToHide) # call the hideData function to hide the secret message into the selected image
+
+    #save the new canges 
+    cv2.imwrite(filePathName, encoded_image) 
     return encoded_image
 
-def decodeText(imageName):
-    # read the image that contains the hidden image 
-    image = cv2.imread(imageName) #read the image using cv2.imread() 
 
+def decodeText(filePathName):
+    # read the image that contains the hidden image 
+    image = cv2.imread(filePathName) #read the image using cv2.imread() 
     text = showData(image)
     return text
 
 
 def hideData(imageName, image, secret_message):
-
     # calculate the maximum bytes to encode
     n_bytes = image.shape[0] * image.shape[1] * 3 // 8
 
@@ -40,11 +39,7 @@ def hideData(imageName, image, secret_message):
     secret_message += "#####" # dummy string as delimeter
 
     data_index = 0
-    # convert input data to binary format using messageToBinary() fucntion
-    # cipherText = encrypt_message(secret_message)[0]  #uncomment this 
-    #binaryCipherText = BitArray(hex=cipherText)
     binaryCipherText = convertTextToBinary(secret_message)
-
 
     data_len = len(binaryCipherText) #Find the length of data that needs to be hidden
     for values in image:
@@ -75,6 +70,7 @@ def hideData(imageName, image, secret_message):
     cv2.imwrite(imageName,image)           
     return image
 
+
 def showData(image):
     binary_data = ""
     for values in image:
@@ -97,6 +93,5 @@ def showData(image):
     
     # result = decrypt_message(decoded_data[:-5])
     result = ascii_caesar_shift_back(decoded_data[:-5].split("@@@@@")[1], int(decoded_data[:-5].split("@@@@@")[0]))
-    print(result)
 
     return result #remove the delimeter to show the original hidden message

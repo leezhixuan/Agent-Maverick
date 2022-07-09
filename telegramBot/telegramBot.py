@@ -1,11 +1,11 @@
 import os
-from dotenv import load_dotenv
 import telebot
-from telebot import types
 import requests
+
+from dotenv import load_dotenv
+from telebot import types
 from collections import defaultdict
 from steganography import encodeText, decodeText 
-
 
 load_dotenv()
 
@@ -14,6 +14,7 @@ bot = telebot.TeleBot(API_TOKEN)
 
 messageIdDictionary = defaultdict(list)
 photoIdDictionary = defaultdict(list)
+
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -43,6 +44,7 @@ def start(message):
         messageOutId = bot.send_message(message.chat.id, "Welcome to Steganography bot. Choose an option below. Use /start at anytime to restart the process.", reply_markup=markup).message_id
         #Append messageOutID
         messageIdDictionary[message.chat.id].append(messageOutId)
+
 
 @bot.message_handler(func=lambda m: True)
 def userOption(message):
@@ -77,6 +79,7 @@ def userOption(message):
         messageOutId = bot.send_message(message.chat.id, "Please use /start again.").message_id
         #Append messageOutID
         messageIdDictionary[message.chat.id].append(messageOutId)
+
 
 def promptDelete(chat_id):
     """
@@ -150,6 +153,7 @@ def recieveImage(message, state):
             #Prompts delete
             promptDelete(message.chat.id)
 
+
 def handleEncryption(message,filename):
     """
     Gets both message to be encrypted and image, returns the image.
@@ -191,6 +195,7 @@ def clearChat(message):
     messageIdDictionary[chat_id] = []
     clearLocalImages(chat_id)
 
+
 def clearLocalImages(chat_id):
     """
     Given chat_id, remove all instances of local image.
@@ -201,6 +206,7 @@ def clearLocalImages(chat_id):
         for photoFile in photoIdDictionary[chat_id]:
             os.remove(photoFile)
     photoIdDictionary[chat_id] = []
+
 
 bot.polling()
 
