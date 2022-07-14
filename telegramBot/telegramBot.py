@@ -18,7 +18,6 @@ def main():
     messageIdDictionary = defaultdict(list)
     photoIdDictionary = defaultdict(list)
 
-
     @bot.message_handler(commands=['start'])
     def start(message):
         """
