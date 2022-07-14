@@ -1,5 +1,4 @@
 import os
-import re
 import telebot
 import requests
 
@@ -12,10 +11,6 @@ load_dotenv()
 
 API_TOKEN = os.getenv('API_TOKEN')
 PORT = int(os.environ.get('PORT', 5000))
-
-uri = os.getenv("DATABASE_URL")  # or other relevant config var
-if uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
 
 
 def main():
