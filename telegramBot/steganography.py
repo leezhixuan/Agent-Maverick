@@ -3,7 +3,6 @@ import random
 
 from cryptography import ascii_caesar_shift, ascii_caesar_shift_back
 from utils import convertTextToBinary
-from bitstring import BitArray
 
 def encodeText(messageToHide, filePathName): 
     if (len(messageToHide) == 0): 
