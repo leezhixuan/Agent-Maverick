@@ -1,1 +1,1 @@
-web: gunicorn telegramBot/telegramBot:app
+web: gunicorn telegramBot:app
