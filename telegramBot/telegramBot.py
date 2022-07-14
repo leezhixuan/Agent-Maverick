@@ -41,7 +41,7 @@ def start(message):
         itembtn1 = types.KeyboardButton("Encrypt")
         itembtn2 = types.KeyboardButton("Decrypt")
         markup.add(itembtn1,itembtn2)
-        messageOutId = bot.send_message(message.chat.id, "🤖Welcome to Steganography bot.🤖 Please choose an option below.☺️ Use /start at anytime to restart the process.🔁 ", reply_markup=markup).message_id
+        messageOutId = bot.send_message(message.chat.id, "🤖Welcome to Steganography bot.🤖 Please choose an option below.☺️ Use /start at anytime to restart the process.🔁 Only PNG Files are ALLOWED!", reply_markup=markup).message_id
         #Append messageOutID
         messageIdDictionary[message.chat.id].append(messageOutId)
 
