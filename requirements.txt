@@ -10,7 +10,7 @@ pyasn1==0.4.8
 pycodestyle==2.8.0
 pycparser==2.21
 pycryptodome==3.15.0
-pyTelegramBotAPI
+pyTelegramBotAPI==4.6.0
 python-dotenv==0.20.0
 requests==2.28.1
 rsa==4.8
