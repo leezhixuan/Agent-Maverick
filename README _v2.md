@@ -35,6 +35,7 @@ The decryption process is simpler. It simple asks for an image from the user. If
 ## Delete Function
 
 ![](demo/Delete.gif)
+
 We built a delete function into the bot that would help clear all sensitive texts sent in the conversation. This was done by keeping track of all `messageIDs` sent in the particular chat and iterating over them to "clear" the chat after. This appeared to be a novel function that we did not see used in other Telegram bots we have come acrossed. 
 
 ## Limitations of the Bot
