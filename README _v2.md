@@ -20,7 +20,7 @@ We used the custom keyboards offered by Telegram to make the user experience int
 
 ## Encryption Process
 
-![Encryption](demo/Encryption.png "Encryption Process")
+![Encryption](demo/Encryptionv2.png "Encryption Process")
 After selecting the encryption process, the user will be asked to provide an image and the text to be encrypted. The bot will return an image that is visually identical. 
 
 
