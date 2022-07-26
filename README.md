@@ -17,7 +17,10 @@
 - `source env/bin/activate`
 - To leave: `deactivate`
 - `pip3 install -r requirements.txt` 
- 
+
+## LifeHack 2022 Submission 
+- [Devpost](https://devpost.com/software/steganography-encryption-bot?ref_content=user-portfolio&ref_feature=in_progress)
+- [Video Demo](https://www.youtube.com/watch?v=9460xClGWlA&t=1s)
 
 ## How to bring Agent Maverick alive
 First, get a Telegram bot API key from @BotFather. 
